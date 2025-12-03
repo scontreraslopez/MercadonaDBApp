@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import net.iessochoa.sergiocontreras.mercadonadb.model.ShoppingStrategy
 
-// TODO hay que desacoplar de ShoppingStrategy
+// TODO hay que desacoplar de ShoppingStrategy y de Product haciendo strings
 
 // TODO quitar esto Modelo de datos simple para la UI (o usa tu Entity directamente)
 data class Product(

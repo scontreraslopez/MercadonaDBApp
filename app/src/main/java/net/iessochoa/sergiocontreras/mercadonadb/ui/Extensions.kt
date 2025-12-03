@@ -11,3 +11,12 @@ fun ShoppingStrategy.getColor(): Color {
         ShoppingStrategy.RANDOM -> Color(0xFF9C27B0) // Morado
     }
 }
+
+fun ShoppingStrategy.getLabel(): String {
+    return when (this) {
+        ShoppingStrategy.CHEAPEST -> "¡Ahorro Total! 🤑"
+        ShoppingStrategy.MOST_EXPENSIVE -> "Capricho de Lujo 💎"
+        ShoppingStrategy.BEST_VALUE -> "Compra Inteligente ⚖️"
+        ShoppingStrategy.RANDOM -> "La Suerte decide 🎲"
+    }
+}
