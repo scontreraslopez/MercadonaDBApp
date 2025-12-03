@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.iessochoa.sergiocontreras.mercadonadb.ui.screens.ShopScreen
 
 /**
  * Project: MercadonaDB
@@ -17,9 +18,6 @@ import androidx.compose.ui.Modifier
 @Composable
 fun MercadonaDbApp() {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Greeting(
-            name = "Android",
-            modifier = Modifier.padding(innerPadding)
-        )
+        ShopScreen(modifier = Modifier.padding(innerPadding))
     }
 }
