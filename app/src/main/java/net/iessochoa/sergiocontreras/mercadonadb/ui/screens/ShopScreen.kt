@@ -45,7 +45,6 @@ fun ShopScreen(modifier: Modifier = Modifier) {
             label = "Estrategia de Compra",
             onValueChangedEvent = {}
         )
-        Spacer(modifier.height(16.dp))
 
         Button(onClick = { /*TODO*/ }) {
             Text("Voy a tener suerte")
