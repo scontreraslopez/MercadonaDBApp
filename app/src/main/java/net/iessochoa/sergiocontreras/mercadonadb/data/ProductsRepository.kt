@@ -26,16 +26,7 @@ object ProductsRepository: IProductRepository {
     fun initialize(context: Context) {
         if (isInitialized) return
 
-        // Creamos la instancia de la base de datos y obtenemos el DAO
-        val database = Room.databaseBuilder(
-            context.applicationContext,
-            MercadoniaDatabase::class.java,
-            MercadoniaDatabase.DATABASE_NAME
-        )
-        // Aquí puedes añadir el .addCallback() si quieres poblar la BBDD desde un CSV
-        // .addCallback(AppDatabase.prepopulateCallback(context))
-        .build()
-
+        val database = MercadoniaDatabase.getDatabase(context)
         productDao = database.productDao()
         isInitialized = true
     }
