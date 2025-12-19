@@ -1,20 +1,17 @@
 package net.iessochoa.sergiocontreras.mercadonadb.ui.screens
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import net.iessochoa.sergiocontreras.mercadonadb.model.ShoppingStrategy
 import net.iessochoa.sergiocontreras.mercadonadb.ui.components.DynamicSelectTextField
-import net.iessochoa.sergiocontreras.mercadonadb.ui.components.Product
 import net.iessochoa.sergiocontreras.mercadonadb.ui.components.ResultCard
 import net.iessochoa.sergiocontreras.mercadonadb.ui.components.SupermarketBanner
+import net.iessochoa.sergiocontreras.mercadonadb.ui.theme.MercadonaDBTheme
 
 /**
  * Project: MercadonaDB
@@ -25,16 +22,15 @@ import net.iessochoa.sergiocontreras.mercadonadb.ui.components.SupermarketBanner
  */
 
 @Composable
-fun ShopScreen(modifier: Modifier = Modifier) {
+fun ShopScreen(
+    uiState: ShopScreenUiState,
+    modifier: Modifier = Modifier
+) {
+    val selectedStrategy = uiState.selectedStrategy
+    val selectedProduct = uiState.selectedProduct
+
     Column (modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        var selectedStrategy = ShoppingStrategy.CHEAPEST
-        val sampleProduct = Product(
-            category = "Fruta",
-            name = "Sandía",
-            price = 3.75,
-            referencePrice = 0.55,
-            referenceUnit = "kg"
-        )
+
 
         SupermarketBanner()
         DynamicSelectTextField(
@@ -50,7 +46,7 @@ fun ShopScreen(modifier: Modifier = Modifier) {
             Text("Voy a tener suerte")
         }
         ResultCard(
-            product = sampleProduct,
+            product = selectedProduct,
             strategy = ShoppingStrategy.CHEAPEST
         )
 
@@ -61,5 +57,22 @@ fun ShopScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewShopScreen() {
-    ShopScreen()
+
+    val sampleProduct = ProductDetails(
+        category = "Fruta",
+        name = "Sandía",
+        price = 3.75,
+        referencePrice = 0.55,
+        referenceUnit = "kg"
+    )
+
+    val uiState = ShopScreenUiState(
+        selectedProduct = sampleProduct,
+        selectedStrategy = ShoppingStrategy.CHEAPEST
+    )
+
+    MercadonaDBTheme() {
+        ShopScreen(uiState)
+    }
+
 }

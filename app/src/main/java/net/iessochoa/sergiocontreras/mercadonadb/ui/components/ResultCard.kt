@@ -14,22 +14,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import net.iessochoa.sergiocontreras.mercadonadb.data.Product
 import net.iessochoa.sergiocontreras.mercadonadb.model.ShoppingStrategy
-
-// TODO hay que desacoplar de ShoppingStrategy y de Product haciendo strings
-
-// TODO quitar esto Modelo de datos simple para la UI (o usa tu Entity directamente)
-data class Product(
-    val category: String,
-    val name: String,
-    val price: Double,
-    val referencePrice: Double,
-    val referenceUnit: String
-)
+import net.iessochoa.sergiocontreras.mercadonadb.ui.screens.ProductDetails
 
 @Composable
 fun ResultCard(
-    product: Product?,
+    product: ProductDetails?,
     strategy: ShoppingStrategy,
     modifier: Modifier = Modifier
 ) {
@@ -123,12 +114,12 @@ fun ResultCard(
 @Preview(showBackground = true)
 @Composable
 fun PreviewResultCardCheapest() {
-    val sampleProduct = Product(
+    val sampleProduct = ProductDetails(
         category = "Fruta",
         name = "Sandía",
         price = 3.75,
         referencePrice = 0.55,
-        referenceUnit = "kg"
+        referenceUnit = "kg",
     )
 
     Column {

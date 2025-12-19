@@ -19,7 +19,7 @@ data class Product (
     @ColumnInfo (name = "price") val price: Double, //Puede dar problemas de precisión pero para esto sirve
     @ColumnInfo (name = "reference_price") val referencePrice: Double,
     @ColumnInfo (name = "reference_unit") val referenceUnit: String,
-    @ColumnInfo (name = "insert_date") val recordDate: LocalDateTime
+    @ColumnInfo (name = "insert_date") val recordDate: String
 )
 
 
