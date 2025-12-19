@@ -44,6 +44,8 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.compose.material.icons.extended)
+
     implementation(libs.androidx.room.runtime)
 
     // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
