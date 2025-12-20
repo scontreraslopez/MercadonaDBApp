@@ -33,4 +33,7 @@ interface ProductDao {
     @Query("SELECT * FROM products")
     fun getProducts(): Flow<List<Product>>
 
+    @Query("SELECT DISTINCT category FROM products")
+    suspend fun getCategories(): List<String>
 }
+

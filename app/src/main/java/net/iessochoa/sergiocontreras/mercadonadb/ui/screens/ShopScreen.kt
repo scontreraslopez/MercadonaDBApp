@@ -1,12 +1,14 @@
 package net.iessochoa.sergiocontreras.mercadonadb.ui.screens
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import net.iessochoa.sergiocontreras.mercadonadb.model.ShoppingStrategy
 import net.iessochoa.sergiocontreras.mercadonadb.ui.components.DynamicSelectTextField
 import net.iessochoa.sergiocontreras.mercadonadb.ui.components.ResultCard
@@ -31,15 +33,27 @@ fun ShopScreen(
 
     Column (modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
 
-
         SupermarketBanner()
+        /* TODO debemos añadir el selector de categoria para eso hay que recuperar todas las categorías */
+
+        val borrame = listOf("Fruta", "Verdura", "Otros")
+
+        DynamicSelectTextField(
+            selectedValue = borrame.first(),
+            options = borrame,
+            label = "Categoría",
+            onValueChangedEvent = {},
+            modifier = Modifier.padding(top=8.dp)
+        )
+
         DynamicSelectTextField(
             selectedValue = selectedStrategy.toString(),
             options = ShoppingStrategy.entries.map {
                 it.toString()
             },
             label = "Estrategia de Compra",
-            onValueChangedEvent = {}
+            onValueChangedEvent = {},
+            modifier = Modifier.padding(top=8.dp)
         )
 
         Button(onClick = { /*TODO*/ }) {

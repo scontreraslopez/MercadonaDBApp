@@ -18,6 +18,9 @@ import net.iessochoa.sergiocontreras.mercadonadb.ui.screens.ShopScreen
 @Composable
 fun MercadonaDbApp() {
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        ShopScreen(modifier = Modifier.padding(innerPadding))
+        ShopScreen(
+            modifier = Modifier.padding(innerPadding),
+            uiState = TODO()
+        )
     }
 }

@@ -11,6 +11,7 @@ interface IProductRepository {
     suspend fun deleteProduct(product: Product)
     suspend fun insertProduct(product: Product)
     suspend fun updateProduct(product: Product)
+    suspend fun getCategories(): List<String>
 }
 
 // Singleton que se inicializa automáticamente en el primer uso
@@ -63,4 +64,9 @@ object ProductsRepository: IProductRepository {
         return productDao.updateProduct(product)
     }
 
+    override suspend fun getCategories(): List<String> {
+        checkInitialized()
+        return productDao.getCategories()
+    }
 }
+

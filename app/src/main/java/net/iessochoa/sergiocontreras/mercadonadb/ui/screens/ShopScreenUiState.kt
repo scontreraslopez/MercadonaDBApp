@@ -4,8 +4,8 @@ import net.iessochoa.sergiocontreras.mercadonadb.data.Product
 import net.iessochoa.sergiocontreras.mercadonadb.model.ShoppingStrategy
 
 data class ShopScreenUiState(
-    val selectedProduct: ProductDetails,
-    val selectedStrategy: ShoppingStrategy
+    val selectedProduct: ProductDetails? = null,
+    val selectedStrategy: ShoppingStrategy? = null
 )
 
 //UI Class sin ruido
