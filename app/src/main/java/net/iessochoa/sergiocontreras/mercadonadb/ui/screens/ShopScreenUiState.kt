@@ -5,7 +5,8 @@ import net.iessochoa.sergiocontreras.mercadonadb.model.ShoppingStrategy
 
 data class ShopScreenUiState(
     val selectedProduct: ProductDetails? = null,
-    val selectedStrategy: ShoppingStrategy? = null
+    val selectedStrategy: ShoppingStrategy? = null,
+    val categories: List<String> = emptyList()
 )
 
 //UI Class sin ruido

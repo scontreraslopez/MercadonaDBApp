@@ -1,11 +1,16 @@
 package net.iessochoa.sergiocontreras.mercadonadb
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import net.iessochoa.sergiocontreras.mercadonadb.ui.screens.ShopScreen
+import net.iessochoa.sergiocontreras.mercadonadb.ui.screens.ShopScreenViewModel
 
 /**
  * Project: MercadonaDB
@@ -16,11 +21,19 @@ import net.iessochoa.sergiocontreras.mercadonadb.ui.screens.ShopScreen
  */
 
 @Composable
-fun MercadonaDbApp() {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+fun MercadonaDbApp(
+    viewModel: ShopScreenViewModel = viewModel(),
+    modifier: Modifier = Modifier
+) {
+
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    Log.d("ShopScreenViewModel", "Categories: ${uiState.categories}")
+
+
+    Scaffold(modifier = modifier.fillMaxSize()) { innerPadding ->
         ShopScreen(
             modifier = Modifier.padding(innerPadding),
-            uiState = TODO()
+            uiState = uiState
         )
     }
 }
