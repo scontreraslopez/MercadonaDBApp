@@ -44,6 +44,20 @@ android {
 
 dependencies {
 
+    // ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    // ViewModel utilities for Compose
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    // Lifecycle utilities for Compose
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
+    // ViewModel integration with Navigation3 -- Por si luego lo meto
+    implementation(libs.androidx.lifecycle.viewmodel.navigation)
+
+    // Saved state module for ViewModel -- Este te lo tienes que meter si necesitas navegar a {id}
+    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
+
+
     implementation(libs.androidx.compose.material.icons.extended)
 
     implementation(libs.androidx.room.runtime)
