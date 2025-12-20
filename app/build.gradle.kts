@@ -52,7 +52,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
 
     // ViewModel integration with Navigation3 -- Por si luego lo meto
-    implementation(libs.androidx.lifecycle.viewmodel.navigation)
+    implementation(libs.androidx.lifecycle.viewmodel.navigation3)
 
     // Saved state module for ViewModel -- Este te lo tienes que meter si necesitas navegar a {id}
     implementation(libs.androidx.lifecycle.viewmodel.savedstate)
