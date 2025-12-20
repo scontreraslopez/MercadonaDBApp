@@ -110,7 +110,7 @@ abstract class MercadoniaDatabase: RoomDatabase() {
                         .map { line -> line.split(csvRegex)} // Transformamos cada línea en una lista de Strings. ¡ATENCION AL DELIMITADOR!
                         .filter { it.size >= 8 } // Filtramos líneas mal formadas o vacías
                         .forEach { data ->
-                            Log.d(TAG, "onCreate: $data")
+                            //Log.d(TAG, "onCreate: $data")
                             //Por cada línea válida, creamos e insertamos
                             val product = Product(
                                 externalId = data[0],

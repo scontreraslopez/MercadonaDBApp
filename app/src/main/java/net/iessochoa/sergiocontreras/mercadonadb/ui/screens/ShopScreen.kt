@@ -26,10 +26,15 @@ import net.iessochoa.sergiocontreras.mercadonadb.ui.theme.MercadonaDBTheme
 @Composable
 fun ShopScreen(
     uiState: ShopScreenUiState,
+    onReloadDatabaseClick: () -> Unit,
+    onSelectedCategoryChange: (String) -> Unit,
+    onSelectedStrategyChange: (ShoppingStrategy) -> Unit,
+    onSearchProduct: (String, ShoppingStrategy) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val selectedStrategy = uiState.selectedStrategy
     val selectedProduct = uiState.selectedProduct
+    val selectedCategory = uiState.selectedCategory
     val categories = uiState.categories
 
     Column (modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
@@ -39,10 +44,12 @@ fun ShopScreen(
 
         if (categories.isNotEmpty()) {
             DynamicSelectTextField(
-                selectedValue = categories.first(),
+                selectedValue = selectedCategory ?: categories.first(),
                 options = categories,
                 label = "Categoría",
-                onValueChangedEvent = {},
+                onValueChangedEvent = {
+                    onSelectedCategoryChange(it)
+                },
                 modifier = Modifier.padding(top = 8.dp)
             )
 
@@ -53,17 +60,25 @@ fun ShopScreen(
                     it.toString()
                 },
                 label = "Estrategia de Compra",
-                onValueChangedEvent = {},
+                onValueChangedEvent = {
+                    val strategyEnum = enumValueOf<ShoppingStrategy>(it)
+                    onSelectedStrategyChange(strategyEnum)},
                 modifier = Modifier.padding(top=8.dp)
             )
 
-            Button(onClick = { /*TODO*/ }) {
+            Button(onClick = { onSearchProduct(
+                selectedCategory ?: categories.first(),
+                selectedStrategy
+            ) }) {
                 Text("Voy a tener suerte")
             }
             ResultCard(
-                product = selectedProduct,
-                strategy = ShoppingStrategy.CHEAPEST
+                product = selectedProduct
             )
+        } else {
+            Button(onClick = onReloadDatabaseClick ) {
+                Text("Reload Database")
+            }
         }
 
     }
@@ -80,18 +95,26 @@ fun PreviewShopScreen() {
         name = "Sandía",
         price = 3.75,
         referencePrice = 0.55,
-        referenceUnit = "kg"
+        referenceUnit = "kg",
+        foundWithStrategy = ShoppingStrategy.CHEAPEST
     )
 
     val sampleCategories = listOf("Fruta", "Verdura", "Carne", "Pescado")
 
     val uiState = ShopScreenUiState(
         selectedProduct = sampleProduct,
-        selectedStrategy = ShoppingStrategy.CHEAPEST
+        selectedStrategy = ShoppingStrategy.CHEAPEST,
+        categories = sampleCategories
     )
 
-    MercadonaDBTheme() {
-        ShopScreen(uiState)
+    MercadonaDBTheme {
+        ShopScreen(
+            uiState = uiState,
+            onSelectedCategoryChange = { },
+            onReloadDatabaseClick = { },
+            onSelectedStrategyChange = { },
+            onSearchProduct = { _, _ -> }
+        )
     }
 
 }

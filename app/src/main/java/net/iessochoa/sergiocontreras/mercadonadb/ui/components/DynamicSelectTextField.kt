@@ -3,9 +3,9 @@ package net.iessochoa.sergiocontreras.mercadonadb.ui.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -43,7 +43,7 @@ fun DynamicSelectTextField(
             },
             colors = OutlinedTextFieldDefaults.colors(), // Colores por defecto
             modifier = Modifier
-                .menuAnchor(MenuAnchorType.PrimaryEditable, true) // Ancla el menú al TextField
+                .menuAnchor(ExposedDropdownMenuAnchorType.PrimaryEditable, true) // Ancla el menú al TextField
                 .fillMaxWidth()
         )
         // El menú desplegable en sí

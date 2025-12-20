@@ -22,18 +22,22 @@ import net.iessochoa.sergiocontreras.mercadonadb.ui.screens.ShopScreenViewModel
 
 @Composable
 fun MercadonaDbApp(
+    modifier: Modifier = Modifier,
     viewModel: ShopScreenViewModel = viewModel(),
-    modifier: Modifier = Modifier
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    Log.d("ShopScreenViewModel", "Categories: ${uiState.categories}")
+    //Log.d("ShopScreenViewModel", "Categories: ${uiState.categories}")
 
 
     Scaffold(modifier = modifier.fillMaxSize()) { innerPadding ->
         ShopScreen(
             modifier = Modifier.padding(innerPadding),
-            uiState = uiState
+            uiState = uiState,
+            onSelectedCategoryChange = { viewModel.onSelectedCategoryChange(it) },
+            onReloadDatabaseClick = { viewModel.reloadDatabase() },
+            onSelectedStrategyChange = { viewModel.onSelectedStrategyChange(it) },
+            onSearchProduct = { category, strategy -> viewModel.onSearchProduct(category, strategy) }
         )
     }
 }

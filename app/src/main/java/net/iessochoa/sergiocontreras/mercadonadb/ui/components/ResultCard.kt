@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,11 +22,12 @@ import net.iessochoa.sergiocontreras.mercadonadb.ui.screens.ProductDetails
 @Composable
 fun ResultCard(
     product: ProductDetails?,
-    strategy: ShoppingStrategy,
     modifier: Modifier = Modifier
 ) {
     // Si no hay producto, mostramos un estado vacío o nada
     if (product == null) return
+
+    val strategy = product.foundWithStrategy
 
     // 1. Lógica de Colores según la estrategia
     val (primaryColor, labelText) = when (strategy) {
@@ -84,7 +86,7 @@ fun ResultCard(
                 color = Color.Black
             )
 
-            Divider(
+            HorizontalDivider(
                 modifier = Modifier
                     .padding(vertical = 12.dp)
                     .width(60.dp),
@@ -120,10 +122,11 @@ fun PreviewResultCardCheapest() {
         price = 3.75,
         referencePrice = 0.55,
         referenceUnit = "kg",
+        foundWithStrategy = ShoppingStrategy.CHEAPEST
     )
 
     Column {
-        ResultCard(product = sampleProduct, strategy = ShoppingStrategy.CHEAPEST)
-        ResultCard(product = sampleProduct.copy(name="Jamón Ibérico", category="Carnicería", price = 55.0, referencePrice = 115.0), strategy = ShoppingStrategy.MOST_EXPENSIVE)
+        ResultCard(product = sampleProduct)
+        ResultCard(product = sampleProduct.copy(name="Jamón Ibérico", category="Carnicería", price = 55.0, referencePrice = 115.0, foundWithStrategy = ShoppingStrategy.MOST_EXPENSIVE))
     }
 }

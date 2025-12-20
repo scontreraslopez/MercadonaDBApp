@@ -8,10 +8,16 @@ import androidx.room.Room// La interfaz sigue siendo una buena práctica para de
 interface IProductRepository {
     fun getProducts(): Flow<List<Product>>
     fun getProduct(id: Long): Flow<Product?> // Devuelve nulo si no lo encuentra
+    fun getCategories(): Flow<List<String>>
+
+
     suspend fun deleteProduct(product: Product)
     suspend fun insertProduct(product: Product)
     suspend fun updateProduct(product: Product)
-    suspend fun getCategories(): List<String>
+
+    suspend fun getProductsByCategory(category: String): List<Product>
+
+    suspend fun reloadDatabase()
 }
 
 // Singleton que se inicializa automáticamente en el primer uso
@@ -23,9 +29,14 @@ object ProductsRepository: IProductRepository {
     //Variable para saber si ya hemos inicializado
     private var isInitialized = false
 
+    //Propiedad para guardar el contexto de forma segura. No es lo mejor pasar Activity context hacia abajo.
+    private lateinit var applicationContext: Context
+
     // Método de inicialización llamable desde fuera
     fun initialize(context: Context) {
         if (isInitialized) return
+
+        this.applicationContext = context.applicationContext
 
         val database = MercadoniaDatabase.getDatabase(context)
         productDao = database.productDao()
@@ -64,9 +75,21 @@ object ProductsRepository: IProductRepository {
         return productDao.updateProduct(product)
     }
 
-    override suspend fun getCategories(): List<String> {
+    override suspend fun getProductsByCategory(category: String): List<Product> {
+        checkInitialized()
+        return productDao.getProductsByCategory(category)
+    }
+
+    override fun getCategories(): Flow<List<String>> {
         checkInitialized()
         return productDao.getCategories()
     }
+
+    override suspend fun reloadDatabase() {
+        checkInitialized()
+        productDao.deleteAllProducts()
+        MercadoniaDatabase.populateDatabase(applicationContext, productDao)
+    }
+
 }
 
